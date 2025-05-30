@@ -4,12 +4,12 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-6">
-                    <h3 class="mb-0">Ajouter un étudiant</h3>
+                    <h3 class="mb-0">Ajouter une évaluation</h3>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-end">
                         <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Tableau de bord</a></li>
-                        <li class="breadcrumb-item"><a href="{{ route('etudiant.index') }}">Étudiants</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('evaluation.index') }}">Évaluations</a></li>
                         <li class="breadcrumb-item active" aria-current="page">ajouter</li>
                     </ol>
                 </div>
@@ -23,41 +23,45 @@
                 <div class="col-md-8 offset-md-2">
                     <div class="card card-secondary card-outline mb-4">
                         <div class="card-header">
-                            <div class="card-title">Formulaire d'ajout d'un étudiant</div>
+                            <div class="card-title">Formulaire d'ajout d'une évaluation</div>
                         </div>
 
-                        @if(session('success'))
+                        @session('success')
                             <div class="alert alert-success text-center">{{ session('success') }}</div>
-                        @endif
+                        @endsession
 
-                        <form action="{{ route('etudiant.store') }}" method="POST">
+                        <form action="{{ route('evaluation.store') }}" method="POST">
                             @csrf
                             <div class="card-body">
                                 <div class="row mb-3">
-                                    <label for="prenom" class="col-sm-3 col-form-label">Prénom</label>
+                                    <label for="titre" class="col-sm-3 col-form-label">Titre</label>
                                     <div class="col-sm-9">
-                                        <input type="text" name="prenom" class="form-control" id="prenom" value="{{ old('prenom') }}" />
-                                        @error('prenom')
+                                        <input type="text" name="titre" class="form-control" id="titre" value="{{ old('titre') }}" />
+                                        @error('titre')
                                             <small style="color: red">{{ $message }}</small>
                                         @enderror
                                     </div>
                                 </div>
 
                                 <div class="row mb-3">
-                                    <label for="nom" class="col-sm-3 col-form-label">Nom</label>
+                                    <label for="date" class="col-sm-3 col-form-label">Date</label>
                                     <div class="col-sm-9">
-                                        <input type="text" name="nom" class="form-control" id="nom" value="{{ old('nom') }}" />
-                                        @error('nom')
+                                        <input type="date" name="date" class="form-control" id="date" value="{{ old('date') }}" />
+                                        @error('date')
                                             <small style="color: red">{{ $message }}</small>
                                         @enderror
                                     </div>
                                 </div>
 
                                 <div class="row mb-3">
-                                    <label for="date_naissance" class="col-sm-3 col-form-label">Date de naissance</label>
+                                    <label for="type" class="col-sm-3 col-form-label">Type</label>
                                     <div class="col-sm-9">
-                                        <input type="date" name="date_naissance" class="form-control" id="date_naissance" value="{{ old('date_naissance') }}" />
-                                        @error('date_naissance')
+                                        <select name="type" id="type" class="form-control">
+                                            <option value="">-- Sélectionnez --</option>
+                                            <option value="examen" {{ old('type') == 'examen' ? 'selected' : '' }}>Examen</option>
+                                            <option value="devoir" {{ old('type') == 'devoir' ? 'selected' : '' }}>Devoir</option>
+                                        </select>
+                                        @error('type')
                                             <small style="color: red">{{ $message }}</small>
                                         @enderror
                                     </div>
@@ -66,7 +70,7 @@
 
                             <div class="card-footer">
                                 <button type="submit" class="btn btn-secondary">Enregistrer</button>
-                                <a href="{{ route('etudiant.index') }}" class="btn float-end">Revenir à la liste</a>
+                                <a href="{{ route('evaluation.index') }}" class="btn float-end">Revenir à la liste</a>
                             </div>
                         </form>
                     </div>

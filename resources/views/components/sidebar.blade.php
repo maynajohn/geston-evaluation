@@ -33,6 +33,20 @@
                         <p>Etudiant</p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('evaluation.index') }}"
+                        class="nav-link {{ request()->routeIs('evaluation.index') ? 'active' : '' }}">
+                        <i class="nav-icon bi bi-person-circle"></i>
+                        <p>Evaluation</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('note.index') }}"
+                        class="nav-link {{ request()->routeIs('note.index') ? 'active' : '' }}">
+                        <i class="nav-icon bi bi-person-circle"></i>
+                        <p>Note</p>
+                    </a>
+                </li>
         
 
 
